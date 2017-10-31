@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">海贼王</string>
+    <string name="hint">请输入你的姓名：</string>
+    <string name="ok">确定</string>
+    <string name="cansle">取消</string>
+    <string name="text_introduce">想知道自己在海贼王中是哪个传奇的海贼,自己的赏金能够达到多少吗？在编辑框中输入你的名字立马就知道了。</string>
+    <string name="toast">纯属娱乐，何必当真</string>
+    <string name="dialog_title">提示</string>
+    <string name="dialog_message">你输入为空，请先在编辑框中输入你的姓名！</string>
+    <string name="dialog_message1">你是否要退出‘海贼王’小游戏？</string>
+    <string name="dialog_title1">请输入好友的电话号码</string>
+    <string name="menu1">分享至微博</string>
+    <string name="menu2">推荐给好友</string>
+    <string name="button_search">查看悬赏令</string>
+    <string name="button_tips">海贼王资料</string>
+    <string name="share">分享</string>
+    <string name="sms_to">海贼王小游戏很不错，赶快去下载吧！</string>
+    <string name="text_weibo">\n（赶快去下载海贼王小游戏吧）</string>
+    <string name="title">我们绝对要过一个无悔的人生！总有一天，我们要踏上这片海洋，按照自己的梦想去闯荡！我们要过上最自由的人生！--路飞</string>
+</resources>

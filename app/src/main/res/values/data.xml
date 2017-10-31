@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="data">
+        <item>1.王下七武海</item>
+        <item>2.十一超新星</item>
+        <item>3.四皇</item>
+        <item>4.古代兵器</item>
+        <item>5.霸气</item>
+        <item>6.超人系恶魔果实</item>
+        <item>7.动物系恶魔果实</item>
+        <item>8.自然系恶魔果实</item>
+        <item>9.索隆的招式</item>
+        <item>10.CP9"六式"</item>
+        <item>11.屠魔令</item>
+        <item>12.主要人物类型</item>
+        <item>13.尾田荣一郎简介</item>
+    </string-array>
+    
+</resources>
