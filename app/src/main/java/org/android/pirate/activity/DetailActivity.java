@@ -6,13 +6,13 @@ import org.android.pirate.R;
 import org.android.pirate.util.AppManager;
 import org.android.pirate.util.CoutName;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,17 +21,16 @@ import android.widget.Toast;
 public class DetailActivity extends BaseActivity {
 	private ImageView image = null;
 	private TextView text;
-	private ImageButton backBtn;
+	private ImageView backBtn;
 	private String name = "";
 	private int number = 0;
-	private AnimationSet set = null;
-	private RotateAnimation ratate = null;
 
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.detail);
+		setContentView(R.layout.activity_detail);
 		
-		backBtn=(ImageButton) findViewById(R.id.back_btn);
+		backBtn=(ImageView) findViewById(R.id.back_button);
 		
 		backBtn.setOnClickListener(new OnClickListener() {
 			
@@ -46,13 +45,7 @@ public class DetailActivity extends BaseActivity {
 		image.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				set = new AnimationSet(true);
-				ratate = new RotateAnimation(0, 360,
-						Animation.RELATIVE_TO_SELF, 0.5f,
-						Animation.RELATIVE_TO_SELF, 0f);
-				ratate.setDuration(1000);
-				set.addAnimation(ratate);
-				image.startAnimation(set);
+
 			}
 		});
 		text = (TextView) findViewById(R.id.detail_text);
@@ -69,8 +62,8 @@ public class DetailActivity extends BaseActivity {
 
 			}
 		}
-		Toast.makeText(DetailActivity.this, R.string.toast, Toast.LENGTH_SHORT)
-				.show();
+//		Toast.makeText(getApplicationContext(), R.string.toast, Toast.LENGTH_SHORT)
+//				.show();
 		String[] haizei=getResources().getStringArray(R.array.haizei);
 		String index = haizei[number % (haizei.length)];
 		try {
@@ -91,7 +84,6 @@ public class DetailActivity extends BaseActivity {
 			e.printStackTrace();
 		}
 
-		AppManager.getInstance().addActivity(this);
 	}
 
 }

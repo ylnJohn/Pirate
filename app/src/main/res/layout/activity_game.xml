@@ -1,54 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        >
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/icon_back"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textSize="18dp"
+            android:textColor="#505050"
+            android:layout_marginStart="52dp"
+            android:text="@string/app_name"
+            />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/titlebar_shadow"
+        />
 
     <ImageView
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@null"
-        android:src="@drawable/start_header_image" />
+        android:src="@drawable/start_header_image"
+        android:scaleType="fitXY"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
 
     <EditText
         android:id="@+id/edit"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/header"
-        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_bg"
         android:hint="@string/hint"
+        android:gravity="center_vertical"
+        android:textSize="22sp"
         android:inputType="text"
+        android:padding="5dp"
         android:singleLine="true" />
 
-    <Button
+    <ImageButton
         android:id="@+id/button_ok"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/edit"
-        android:layout_below="@id/header"
-        android:layout_toRightOf="@id/edit"
-        android:drawableLeft="@drawable/icon_search"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@null"
+        android:src="@drawable/ic_search_grey"
         android:gravity="center"
-        android:text="@string/ok" />
+        android:text="@string/button_send" />
+
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/edit"
-        android:layout_centerHorizontal="true"
+        android:layout_width="180dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center_horizontal"
         android:contentDescription="@null"
-        android:src="@drawable/back" />
+        android:src="@drawable/haizei_image" />
 
     <TextView
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/image"
         android:text="@string/text_introduce"
         android:textColor="@color/blue"
-        android:textSize="20sp" />
+        android:padding="5dp"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/button_search"
@@ -61,7 +104,8 @@
         android:drawableLeft="@drawable/icon_photoes"
         android:gravity="center"
         android:text="@string/button_search"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/button_tips"
@@ -75,5 +119,6 @@
         android:drawableLeft="@drawable/icon_catogory"
         android:gravity="center"
         android:text="@string/button_tips"
-        android:textColor="@color/black" />
-</RelativeLayout>
+        android:textColor="@color/black"
+        android:visibility="gone"/>
+</LinearLayout>
