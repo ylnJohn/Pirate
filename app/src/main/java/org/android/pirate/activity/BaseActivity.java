@@ -32,6 +32,8 @@ public class BaseActivity extends Activity{
 //            getWindow().getDecorView().setBackground(new ColorDrawable(Color.RED));
 //            getWindow().getDecorView().setPadding(0, Util.dip2px(getApplicationContext(), 25), 0, 0);
         }
+        //去除启动页
+        getWindow().setBackgroundDrawable(null);
     }
 
     @Override

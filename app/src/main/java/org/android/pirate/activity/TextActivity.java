@@ -17,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,7 +25,7 @@ public class TextActivity extends BaseActivity implements OnClickListener{
 	private TextView text,backText;
 	private LinearLayout layout;
 	private EditText dialog_edit=null;
-	private ImageButton backBtn;
+	private ImageView backBtn;
 	private Button shareBtn,sendBtn;
 
 	@Override
@@ -39,13 +40,13 @@ public class TextActivity extends BaseActivity implements OnClickListener{
 		layout=new LinearLayout(this);
 	    layout.setOrientation(LinearLayout.VERTICAL);	        
 	    dialog_edit=new EditText(this);
-	    dialog_edit.setId(0x123456);
+//	    dialog_edit.setId(0x123456);
 	    layout.addView(dialog_edit);
 		Bundle b=this.getIntent().getExtras();
 		String string=b.getString("data");
+		String str=subString(string);
 		backText=(TextView) findViewById(R.id.back_text);
 		backText.setText(string);
-		String str=subString(string);		
 		try {
 			Field f = R.string.class.getField(str);
 			text.setText(f.getInt(R.string.class));
@@ -59,9 +60,8 @@ public class TextActivity extends BaseActivity implements OnClickListener{
 			e.printStackTrace();
 		}
 		
-		backBtn=(ImageButton) findViewById(R.id.back_btn);
+		backBtn=(ImageView) findViewById(R.id.back_button);
 		backBtn.setOnClickListener(this);
-		AppManager.getInstance().addActivity(this);
 	}
 	
 	
@@ -113,7 +113,7 @@ public class TextActivity extends BaseActivity implements OnClickListener{
 				.create();
 				dialog.show();
 				break;
-			case R.id.back_btn:
+			case R.id.back_button:
 				finish();
 				break;
 		}

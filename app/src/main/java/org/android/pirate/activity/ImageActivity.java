@@ -32,6 +32,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ViewFlipper;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 public class ImageActivity extends BaseActivity {
 
 //	private ViewPager viewPager;
@@ -47,6 +50,10 @@ public class ImageActivity extends BaseActivity {
     private int currentItem = 0;
 
     private Random random = new Random();
+
+    private ImageView mControlBtn;
+
+    private AdView mAdView;
 
 //	private ScheduledExecutorService scheduledExecutorService;
 
@@ -91,6 +98,19 @@ public class ImageActivity extends BaseActivity {
         mViewFlipper = (ViewFlipper) findViewById(R.id.image_view);
         titleText = (MarqueeText) findViewById(R.id.title);
         length = getResources().getStringArray(R.array.haizei).length;
+        mControlBtn= (ImageView) findViewById(R.id.control_button);
+        mControlBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!mViewFlipper.isFlipping()){
+                    mViewFlipper.startFlipping();
+                    mControlBtn.setImageResource(R.drawable.icon_pause);
+                }else{
+                    mViewFlipper.stopFlipping();
+                    mControlBtn.setImageResource(R.drawable.icon_start);
+                }
+            }
+        });
 //	        List<View> list=new ArrayList<View>();
         try {
             for (int i = 0; i < length; i++) {
@@ -142,12 +162,36 @@ public class ImageActivity extends BaseActivity {
             }
         });
 
+        // 获取广告条
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mViewFlipper.stopFlipping();
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mAdView != null) {
+            mAdView.resume();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mAdView != null) {
+            mAdView.pause();
+        }
     }
 
     //	 @Override

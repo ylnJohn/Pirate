@@ -6,11 +6,14 @@ import org.android.pirate.R;
 import org.android.pirate.util.AppManager;
 import org.android.pirate.util.CoutName;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
+import android.view.animation.DecelerateInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -45,7 +48,13 @@ public class DetailActivity extends BaseActivity {
 		image.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-
+				AnimatorSet set=new AnimatorSet();
+				ObjectAnimator alpha=ObjectAnimator.ofFloat(image,View.ALPHA,0f,1f);
+				ObjectAnimator rotate=ObjectAnimator.ofFloat(image,View.ROTATION,0,360);
+				set.playTogether(alpha,rotate);
+				set.setDuration(800);
+				set.setInterpolator(new DecelerateInterpolator());
+				set.start();
 			}
 		});
 		text = (TextView) findViewById(R.id.detail_text);

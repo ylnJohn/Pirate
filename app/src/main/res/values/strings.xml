@@ -24,4 +24,7 @@
     <string name="button_knowledage">常识</string>
     <string name="button_back">返回</string>
     <string name="button_send">提交</string>
+    <string name="answer_success">恭喜你，成功通关!</string>
+    <string name="send_answer_error">请先选择好答案，再提交。</string>
+    <string name="answer_error">回答错误，正确答案是:%s,下次继续努力吧!</string>
 </resources>

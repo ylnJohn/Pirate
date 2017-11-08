@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 
@@ -19,8 +20,9 @@ import org.android.pirate.SystemConfig;
 public class StartActivity extends BaseActivity implements View.OnClickListener {
 
     private InterstitialAd ad;
-    private Button mGameBtn, mImageBtn, mDataBtn;
+    private Button mGameBtn, mImageBtn, mDataBtn,mAnswerBtn;
     private boolean isPause = false;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,12 @@ public class StartActivity extends BaseActivity implements View.OnClickListener 
         mImageBtn.setOnClickListener(this);
         mDataBtn = (Button) findViewById(R.id.start_data);
         mDataBtn.setOnClickListener(this);
+        mAnswerBtn = (Button) findViewById(R.id.start_answer);
+        mAnswerBtn.setOnClickListener(this);
+        // 获取广告条
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override
@@ -65,6 +73,14 @@ public class StartActivity extends BaseActivity implements View.OnClickListener 
                 Intent i = new Intent(this, ImageActivity.class);
                 startActivity(i);
                 break;
+            case R.id.start_data:
+                Intent in = new Intent(this, DataActivity.class);
+                startActivity(in);
+                break;
+            case R.id.start_answer:
+                Intent inte = new Intent(this, AnswerActivity.class);
+                startActivity(inte);
+                break;
         }
     }
 
@@ -72,11 +88,27 @@ public class StartActivity extends BaseActivity implements View.OnClickListener 
     protected void onPause() {
         super.onPause();
         isPause = true;
+        if (mAdView != null) {
+            mAdView.pause();
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         isPause = false;
+        if (mAdView != null) {
+            mAdView.resume();
+        }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        BannerManager.getInstance(getApplicationContext()).onDestroy();
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
+    }
+
 }

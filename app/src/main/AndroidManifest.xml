@@ -29,6 +29,8 @@
         <activity android:name=".activity.DataActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activity.ImageActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activity.DetailActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.TextActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.AnswerActivity" android:screenOrientation="portrait"/>
 
 
         <activity android:name="com.google.android.gms.ads.AdActivity"

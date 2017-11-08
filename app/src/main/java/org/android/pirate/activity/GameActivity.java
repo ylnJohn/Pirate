@@ -16,6 +16,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 public class GameActivity extends BaseActivity {
 
     private EditText edit = null;
@@ -27,6 +30,8 @@ public class GameActivity extends BaseActivity {
 //    private boolean isExit = false;
 
     private MediaPlayer player = null;
+
+    private AdView mAdView;
 
     //	@SuppressLint("HandlerLeak")
 //	private Handler handler=new Handler(){
@@ -104,6 +109,11 @@ public class GameActivity extends BaseActivity {
 //                startActivity(intent);
 //            }
 //        });
+
+        // 获取广告条
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override
@@ -111,6 +121,9 @@ public class GameActivity extends BaseActivity {
         super.onResume();
         edit.setText("");
         edit.requestFocus();
+        if (mAdView != null) {
+            mAdView.resume();
+        }
     }
 
     //   @Override
@@ -130,12 +143,23 @@ public class GameActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
+        super.onDestroy();
         player.stop();
         player.release();
         if (player != null) {
             player = null;
         }
-        super.onDestroy();
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mAdView != null) {
+            mAdView.pause();
+        }
     }
 
 
