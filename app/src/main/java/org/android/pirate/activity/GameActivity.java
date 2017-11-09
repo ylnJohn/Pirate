@@ -10,10 +10,13 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
@@ -29,7 +32,7 @@ public class GameActivity extends BaseActivity {
 
 //    private boolean isExit = false;
 
-    private MediaPlayer player = null;
+//    private MediaPlayer player = null;
 
     private AdView mAdView;
 
@@ -48,16 +51,16 @@ public class GameActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        player = new MediaPlayer();
-        player = MediaPlayer.create(this, R.raw.music);
-        try {
-            player.prepare();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        player.start();
+//        player = new MediaPlayer();
+//        player = MediaPlayer.create(this, R.raw.music);
+//        try {
+//            player.prepare();
+//        } catch (IllegalStateException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        player.start();
         edit = (EditText) findViewById(R.id.edit);
         button_ok = (ImageButton) findViewById(R.id.button_ok);
 //        button_search = (Button) findViewById(R.id.button_search);
@@ -66,22 +69,16 @@ public class GameActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
-                name = edit.getText().toString().trim();
-                if (name.equals("")) {
-//                    Dialog dialog = new AlertDialog.Builder(GameActivity.this)
-//                            .setTitle(R.string.dialog_title)
-//                            .setMessage(R.string.dialog_message)
-//                            .setPositiveButton(R.string.ok, null)
-//                            .create();
-//                    dialog.show();
-                    Toast.makeText(getApplicationContext(),R.string.dialog_message,Toast.LENGTH_SHORT).show();
-                } else {
-                    Intent intent = new Intent(GameActivity.this, DetailActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("name", name);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+                searchName();
+            }
+        });
+        edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId== EditorInfo.IME_ACTION_SEARCH){
+                    searchName();
                 }
+                return true;
             }
         });
 
@@ -116,6 +113,25 @@ public class GameActivity extends BaseActivity {
         mAdView.loadAd(adRequest);
     }
 
+    private void searchName(){
+        name = edit.getText().toString().trim();
+        if (name.equals("")) {
+//                    Dialog dialog = new AlertDialog.Builder(GameActivity.this)
+//                            .setTitle(R.string.dialog_title)
+//                            .setMessage(R.string.dialog_message)
+//                            .setPositiveButton(R.string.ok, null)
+//                            .create();
+//                    dialog.show();
+            Toast.makeText(getApplicationContext(),R.string.dialog_message,Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(GameActivity.this, DetailActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("name", name);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -144,11 +160,11 @@ public class GameActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        player.stop();
-        player.release();
-        if (player != null) {
-            player = null;
-        }
+//        player.stop();
+//        player.release();
+//        if (player != null) {
+//            player = null;
+//        }
         if (mAdView != null) {
             mAdView.destroy();
         }

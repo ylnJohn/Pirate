@@ -12,7 +12,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp">
+        android:layout_height="@dimen/title_bar_height">
 
         <ImageView
             android:id="@+id/back_button"
@@ -96,7 +96,7 @@
         android:textSize="20sp"
         android:lineSpacingExtra="1.8dp"
         android:lineSpacingMultiplier="1.2"
-        android:padding="5dp"
+        android:padding="10dp"
         android:textStyle="bold"
         android:layout_below="@id/question_header"
         />
@@ -107,7 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/question_content"
         android:orientation="vertical"
-        android:padding="5dp">
+        android:padding="10dp">
         <RadioButton
             android:id="@+id/question_item1"
             android:layout_width="match_parent"

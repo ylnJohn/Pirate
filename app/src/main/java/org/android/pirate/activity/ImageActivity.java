@@ -16,11 +16,15 @@ import org.android.pirate.view.MarqueeText;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -30,6 +34,7 @@ import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ViewFlipper;
 
 import com.google.android.gms.ads.AdRequest;
@@ -97,15 +102,16 @@ public class ImageActivity extends BaseActivity {
 //	        viewPager=(ViewPager) findViewById(R.id.image);
         mViewFlipper = (ViewFlipper) findViewById(R.id.image_view);
         titleText = (MarqueeText) findViewById(R.id.title);
-        length = getResources().getStringArray(R.array.haizei).length;
-        mControlBtn= (ImageView) findViewById(R.id.control_button);
+        String[] array=getResources().getStringArray(R.array.haizei);
+        length = array.length;
+        mControlBtn = (ImageView) findViewById(R.id.control_button);
         mControlBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!mViewFlipper.isFlipping()){
+                if (!mViewFlipper.isFlipping()) {
                     mViewFlipper.startFlipping();
                     mControlBtn.setImageResource(R.drawable.icon_pause);
-                }else{
+                } else {
                     mViewFlipper.stopFlipping();
                     mControlBtn.setImageResource(R.drawable.icon_start);
                 }
@@ -114,13 +120,17 @@ public class ImageActivity extends BaseActivity {
 //	        List<View> list=new ArrayList<View>();
         try {
             for (int i = 0; i < length; i++) {
-                String name = getResources().getStringArray(R.array.haizei)[i];
+                String name = array[i];
                 ImageView image = new ImageView(this);
                 Field field = R.drawable.class.getField(name);
                 image.setImageResource(field.getInt(R.drawable.class));
+                image.setScaleType(ImageView.ScaleType.CENTER_CROP);
 //					list.add(image);
-                ViewGroup.LayoutParams params=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,Util.dip2px(getApplicationContext(),400));
-                mViewFlipper.addView(image,params);
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(getResources().getDimensionPixelOffset(R.dimen.haizei_image_width), getResources().getDimensionPixelOffset(R.dimen.haizei_image_height));
+//                params.gravity= Gravity.CENTER_HORIZONTAL;
+                params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+                image.setLayoutParams(params);
+                mViewFlipper.addView(image);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -146,9 +156,9 @@ public class ImageActivity extends BaseActivity {
 //	        });
         mViewFlipper.setAutoStart(true);
         mViewFlipper.setFlipInterval(3000);
-        mViewFlipper.setInAnimation(this,R.anim.left_in);
-        mViewFlipper.setOutAnimation(this,R.anim.left_out);
-        if(!mViewFlipper.isFlipping()){
+        mViewFlipper.setInAnimation(this, R.anim.left_in);
+        mViewFlipper.setOutAnimation(this, R.anim.left_out);
+        if (!mViewFlipper.isFlipping()) {
             mViewFlipper.startFlipping();
         }
         titleText.setSpeed(1.0f);
@@ -169,10 +179,34 @@ public class ImageActivity extends BaseActivity {
 
     }
 
+    private void recycleBitmap() {
+        if (mViewFlipper != null) {
+            int count = mViewFlipper.getChildCount();
+            for (int i = 0; i < count; i++) {
+                View view = mViewFlipper.getChildAt(i);
+                if (!(view instanceof ImageView))
+                    return;
+                ImageView img = (ImageView) view;
+                if (img != null) {
+                    Drawable drawable = img.getDrawable();
+                    if (drawable != null) {
+                        if (drawable instanceof BitmapDrawable) {
+                            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+                            Bitmap bitmap = bitmapDrawable.getBitmap();
+                            if (bitmap != null)
+                                bitmap.recycle();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mViewFlipper.stopFlipping();
+//        recycleBitmap();
         if (mAdView != null) {
             mAdView.destroy();
         }

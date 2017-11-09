@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="start_title_top">10dp</dimen>
+    <dimen name="start_button_top">5dp</dimen>
+    <dimen name="start_button_bottom">1dp</dimen>
+    <dimen name="title_bar_height">45dp</dimen>
+    <dimen name="game_edit_height">40dp</dimen>
+    <dimen name="game_image_height">230dp</dimen>
+    <dimen name="haizei_image_height">350dp</dimen>
+    <dimen name="haizei_image_width">250dp</dimen>
+</resources>

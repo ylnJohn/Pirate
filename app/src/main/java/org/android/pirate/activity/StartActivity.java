@@ -20,7 +20,7 @@ import org.android.pirate.SystemConfig;
 public class StartActivity extends BaseActivity implements View.OnClickListener {
 
     private InterstitialAd ad;
-    private Button mGameBtn, mImageBtn, mDataBtn,mAnswerBtn;
+    private Button mGameBtn, mImageBtn, mDataBtn, mAnswerBtn;
     private boolean isPause = false;
     private AdView mAdView;
 
@@ -35,16 +35,19 @@ public class StartActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onAdLoaded() {
                 super.onAdLoaded();
-                Log.i("yaolinnan", "onAdLoaded");
-                if (!isPause) {
-                    ad.show();
-                }
+                mAdView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (!isPause) {
+                            ad.show();
+                        }
+                    }
+                }, 2000);
             }
 
             @Override
             public void onAdFailedToLoad(int i) {
                 super.onAdFailedToLoad(i);
-                Log.i("yaolinnan", "onAdFailedToLoad:" + i);
             }
         });
         ad.loadAd(new AdRequest.Builder().build());
