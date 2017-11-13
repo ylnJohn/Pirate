@@ -18,8 +18,8 @@
     <string name="sms_to">海贼王小游戏很不错，赶快去下载吧！</string>
     <string name="text_weibo">\n（赶快去下载海贼王小游戏吧）</string>
     <string name="title">我们绝对要过一个无悔的人生！总有一天，我们要踏上这片海洋，按照自己的梦想去闯荡！我们要过上最自由的人生！--路飞</string>
-    <string name="button_start">开始游戏</string>
-    <string name="button_image">悬赏令</string>
+    <string name="button_start">小游戏</string>
+    <string name="button_image">查看悬赏令</string>
     <string name="button_answer">知识问答</string>
     <string name="button_knowledage">常识</string>
     <string name="button_back">返回</string>

@@ -19,7 +19,7 @@ public class DataActivity extends BaseActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.data);
+		setContentView(R.layout.activity_data);
 		listView= (ListView) findViewById(R.id.data_list);
 		data=getResources().getStringArray(R.array.data);
 		ArrayAdapter<?> adapter=new ArrayAdapter(this,R.layout.list_item,R.id.data_title,data);
